@@ -96,7 +96,7 @@ class MsgController extends Controller{
         $uses=YiiUser::findAll($ids);
         $to=array();
         foreach($uses as $v){
-            $to[$v->id]=$v->nickname;
+            $to[$v->id]=$v->user;
         }
 
         $model=new Msg();
