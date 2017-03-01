@@ -17,6 +17,7 @@ class YiiUser extends ActiveRecord implements IdentityInterface
 {
     public $thumb;
     public $nickname;
+    public $username;
     /**
      * @inheritdoc
      */

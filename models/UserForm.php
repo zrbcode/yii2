@@ -9,7 +9,8 @@ class UserForm extends Model{
     public  $pwd;
     public  $verifyCode;
     private $_user = false;
-
+    public $search; //模型先设置相应的属性。
+    //？验证规则是否可以设置作用域（不同表单的数据同一模型的情况）
     public function rules(){
 
         return [
@@ -17,6 +18,7 @@ class UserForm extends Model{
             ['user', 'string', 'max' => 50,'tooLong'=>'{attribute}长度必需在100以内'],
             ['pwd', 'string', 'max' => 32,'tooLong'=>'{attribute}长度必需在32以内'],
             ['pwd','validatePassword','message'=>'账号或密码不正确！'],
+            ['search','string','message'=>'{attribute}搜索条件为空！请重新输入'], //添加模型验证规则
         ];
     }
 
@@ -30,6 +32,7 @@ class UserForm extends Model{
             'user' => '账号',
             'pwd' => '密码',
             'verifyCode'=>'验证',
+            'search' =>"搜索用户名："
         ];
     }
 

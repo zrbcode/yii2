@@ -12,7 +12,7 @@ use yii\filters\AccessControl;
 
 
 class IndexController extends Controller{
-    public $enableCsrfValidation = true;//yii默认表单csrf验证，如果post不带改参数会报错！
+    public $enableCsrfValidation = false;//yii默认表单csrf验证，如果post不带改参数会报错！
     public $layout  = 'layout';
 
     /**
@@ -20,7 +20,7 @@ class IndexController extends Controller{
      */
 
     /**
-     * @用户授权规则
+     * @用户授权规则,全部小写，驼峰法写法词组之间加-
      */
     public function behaviors()
     {
@@ -34,7 +34,7 @@ class IndexController extends Controller{
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout','edit','add','del','index','users','thumb','upload','cutpic','follow','nofollow','dotest','newtitle','LoadPassword'],
+                        'actions' => ['logout','edit','add','del','index','users','thumb','upload','cutpic','follow','nofollow','dotest','newtitle','loadpa','usersearch','try'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -56,8 +56,19 @@ class IndexController extends Controller{
             ],
         ];
     }
-
-
+    /*
+    *
+    *数据库查询的方式。
+    */
+    public function actionUsersearch(){
+        $request = Yii::$app->request;
+        $word = $request->post()['UserForm']['search']; //？接收模型的数据方式有哪些
+        $connection = Yii::$app->db;
+        $sql = "select * from `yii_user` where `user` like '%".$word."%'";
+        $res = $connection->createCommand($sql)->queryAll();
+        //$res = "aaa"; 
+        return $this->render("usersearch",array("res"=>$res));
+    }
     /**
      * @return string 后台默认页面
      */
@@ -110,33 +121,45 @@ class IndexController extends Controller{
     public function actionDotest(){
         $uid = Yii::$app->user->getId();
         //echo $uid;
-        return $this->render("dotest",array('data'=>$uid));
+        $model = new UserForm();
+        
+        return $this->render("dotest",array('data'=>$uid,'model'=>$model));
     }
     public function actionNewtitle(){
         $user_list = YiiUser::find()->all();
         return $this->render("newtitle",array("list"=>$user_list));
     }
     //更新密码 ajax
-    public function actionLoadPassword(){
-
+    public function actionLoadpa(){
         $request = Yii::$app->request;
-        
-        $val = $request->post("val");
-        $uid = $request->post("uid");
-        if($uid){
-           $connection = \Yii::$app->db;
-            //2.查询数据
-           $sql = "update `yii_user` set password=".md5($val)." where(`id`=".$uid.")";
-           $command = $connection->createCommand($sql);
-           $posts = $command->queryAll();
-        }
-        if($posts){
-            echo 1;
+        if($request->isAjax){
+            $val = $request->post("val");
+            $uid = $request->post("uid");
+            if($uid){
+               $connection = Yii::$app->db;
+                //2.查询数据
+               $sql = "update `yii_user` set `pwd` ='".md5($val)."' where(`id`=".$uid.")";
+               $command = $connection->createCommand($sql);
+               $posts = $command->execute();
+            }
+            if($posts){
+                //return $this->render("loadpa",array("val"=>$posts));
+                echo 1;
+            }
+            else{
+                //return $this->render("loadpa",array("val"=>"error"));
+                echo 0;
+            }
+            
         }
         else{
-            echo 0;
+            //return $this->render("loadpa",array("val"=>"That not ajax request"));
+            echo "That not ajax request";
         }
+        
     }
+
+    
 
 
     /**

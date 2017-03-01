@@ -17,8 +17,13 @@ use yii\widgets\ActiveForm;
     		});
     		$(".uppass").blur(function(){
     			$(this).css("border","1px solid #fff");
-    			$.post("/admin/index/LoadPassword",{'val':$(this).val(),'uid':$(this).attr("id")},function(e){
-    				console.log(e);
+    			$.post("/admin/index/loadpa",{'val':$(this).val(),'uid':$(this).attr("id")},function(data){
+                    if(data==1){
+                        alert("成功："+data);
+                    }
+                    else{
+                        alert("失败："+data);
+                    }
     			});
     		});
     	});
