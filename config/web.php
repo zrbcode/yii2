@@ -10,6 +10,7 @@ $config = [
     'defaultRoute'=>'admin/index/index',//默认路由，控制器+方法
     'modules' => [
         'admin'=>'app\modules\admin\admin',//后台模块引用
+        'zypt'=>'app\modules\zypt\zypt',
     ],
     'components' => [
         'request' => [
@@ -55,6 +56,7 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'db1'=> require(__DIR__ . '/db1.php'),
     ],
     'params' => $params,
 ];
