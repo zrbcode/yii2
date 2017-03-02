@@ -82,12 +82,13 @@ use yii\widgets\ActiveForm;
     var mysend="<?= Yii::$app->urlManager->createUrl('admin/msg/mysend')?>";
     var newurl = "<?= Yii::$app->urlManager->createUrl('admin/index/newtitle')?>";
     var newurl1 = "<?= Yii::$app->urlManager->createUrl('admin/index/dotest')?>";
+    var restfulapi = "<?=Yii::$app->urlManager->createUrl('zypt/zypt/show-live-list')?>";
     BUI.use('common/main',function(){
         var config = [
             {id:'1',menu:[
                   {text:'系统管理',items:[{id:'11',text:'朋友圈',href:test},{id:'12',text:'头像管理',href:thumb}]},
                   {text:'消息管理',items:[{id:'22',text:'我的消息',href:msg},{id:'23',text:'我发送的',href:mysend},{id:'24',text:'发送信息',href:sendmsg}]},
-                  {text:'做测试',items:[{id:'31',text:'模型测试',href:newurl},{id:'32',text:'url测试',href:newurl1}]},
+                  {text:'做测试',items:[{id:'31',text:'模型测试',href:newurl},{id:'32',text:'url测试',href:newurl1},{id:'33',text:'测试接口',href:restfulapi}]},
                 ]},
             {id:'7',homePage : '9',menu:[{text:'业务管理',items:[{id:'9',text:'查询业务',href:test}]}]}
         ];
