@@ -247,8 +247,8 @@ class IndexController extends Controller{
      * @用户头像上传
      */
     public function  actionThumb(){
-       $user=YiiUser::findOne(Yii::$app->user->getId());
-        return $this->render('thumb',array('user'=>$user));
+       $user=YiiUser::findOne(Yii::$app->user->getId())->toArray();    //？返回的是对象，如何返回数组
+       return $this->render('thumb',array('user'=>$user));
     }
 
     /**
@@ -314,9 +314,9 @@ class IndexController extends Controller{
 
             if(imagejpeg($dst_r,$img,$jpeg_quality)){
                 //更新用户头像
-                $user=YiiUser::findOne(Yii::$app->user->getId());
-                $user->thumb=$ext;
-                $user->save();
+                $db = Yii::$app->db;
+                $sql = "update `yii_user` set `thumb`='".$ext."' where id =".Yii::$app->user->getId();
+                $resinfo = $db->createCommand($sql)->execute();
                 $arr['status']=1;
                 $arr['data']=$ext;
                 $arr['info']='裁剪成功！';
@@ -327,6 +327,22 @@ class IndexController extends Controller{
                 echo json_encode($arr);
             }
             exit;
+        }
+    }
+    //判断用户是否有头像
+    public function actionHasthumb($uid){
+        if($uid){
+            $db = Yii::$app->db;
+            $res = $db->createCommand("select `thumb` from `yii_user` where(`id`='".$uid."')")->one();
+            if($res){
+                return $res;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
         }
     }
 

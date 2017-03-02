@@ -73,10 +73,11 @@ use yii\widgets\ActiveForm;
                 <h3>头像上传：</h3>
 
                 <div class="text">
-                    <?php if($user->thumb):?>
-                    <img class="img-circle tx" src="<?=$user->thumb ?>" alt=""/>
-                        <?php else:?>
-                        <img class="img-circle tx" src="/avatar/photo.jpg" alt=""/>
+                    
+                    <?php if($user['thumb']):?>
+                        <img class="img-circle tx" src="<?=$user['thumb'] ?>" alt="头像"/>
+                    <?php else:?>
+                        <img class="img-circle tx" src="/avatar/photo.jpg" alt="头像"/>
                     <?php endif ?>
                 </div>
 
