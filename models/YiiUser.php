@@ -15,7 +15,7 @@ use yii\web\IdentityInterface;
  */
 class YiiUser extends ActiveRecord implements IdentityInterface
 {
-    public $thumb;
+    //public $thumb;
     public $nickname;
     public $username;
     /**
