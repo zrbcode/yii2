@@ -11,12 +11,12 @@ use yii\widgets\ActiveForm;
     <?=Html::jsFile('@web/assets/js/jquery-1.8.1.min.js')?>
     <script>
     	$(document).ready(function(){
-    		$(this).css("border","1px solid #fff");
+    		$(this).css("border","1px solid #aaa");
     		$(".uppass").focus(function(){
     			$(this).css("border","1px solid #A9BAC9");
     		});
     		$(".uppass").blur(function(){
-    			$(this).css("border","1px solid #fff");
+    			$(this).css("border","1px solid #aaa");
     			$.post("/admin/index/loadpa",{'val':$(this).val(),'uid':$(this).attr("id")},function(data){
                     if(data==1){
                         alert("成功："+data);

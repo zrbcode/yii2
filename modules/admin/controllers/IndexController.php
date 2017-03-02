@@ -213,7 +213,7 @@ class IndexController extends Controller{
 
     public function actionLogin(){
         $model=new UserForm();
-
+        $model->scenario="login";
         if($model->load(Yii::$app->request->post())){
 
             if($model->login()){

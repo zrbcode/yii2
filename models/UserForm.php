@@ -11,6 +11,9 @@ class UserForm extends Model{
     private $_user = false;
     public $search; //模型先设置相应的属性。
     //？验证规则是否可以设置作用域（不同表单的数据同一模型的情况）
+    /*
+    *以上解决方案：建立不同场景，以验证不同的规则
+    **/
     public function rules(){
 
         return [
@@ -19,9 +22,17 @@ class UserForm extends Model{
             ['pwd', 'string', 'max' => 32,'tooLong'=>'{attribute}长度必需在32以内'],
             ['pwd','validatePassword','message'=>'账号或密码不正确！'],
             ['search','string','message'=>'{attribute}搜索条件为空！请重新输入'], //添加模型验证规则
+            ['search','required','message'=>"{attribute}不能为空！"]
         ];
     }
-
+    public function scenarios()
+    {
+        return [
+            // 注册场景允许 username 的批量赋值
+            'login' => ['user', 'pwd'],
+            'search' => ['search'],
+        ];
+    }
 
     /**
      * @
