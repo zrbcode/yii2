@@ -24,7 +24,7 @@ class ZyptController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['index','get-name','show-live-list','test-data'],
+                        'actions' => ['index','get-name','show-live-list','test-data','show-ext'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -51,6 +51,12 @@ class ZyptController extends Controller
     	$res = $connection->createCommand($sql)->queryAll();
     	var_dump($res);
     }
+    //show ext
+    public function actionShowExt(){
+        print_r($_SESSION);exit;
+        
+    }
+
 
 
 }

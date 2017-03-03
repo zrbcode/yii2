@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 use app\models\Follow;
 use app\models\Msg;
 use Yii;
+use yii\web\NotFoundHttpException;
 use yii\web\Controller;
 use app\models\YiiUser;
 use yii\web\session;
