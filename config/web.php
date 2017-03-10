@@ -4,10 +4,9 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'User Email system',
-   // 'path'=>'http://'.$_SERVER['HTTP_HOST'],,
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'defaultRoute'=>'admin/index/index',//默认路由，控制器+方法
+    'defaultRoute'=>'/admin/index/index',//默认路由，控制器+方法
     'modules' => [
         'admin'=>'app\modules\admin\admin',//后台模块引用
         'zypt'=>'app\modules\zypt\zypt',
@@ -15,7 +14,7 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'abcd',
+            'cookieValidationKey' => '123wqeqwfqwf',
 
         ],
         'cache' => [

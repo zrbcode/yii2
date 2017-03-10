@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Modules\zypt;
+namespace app\modules\zypt;
 
-class zypt extends \yii\base\Module
+class zypt extends \yii\base\module
 {
-    public $controllerNamespace = 'app\Modules\zypt\controllers';
+    public $controllerNamespace = 'app\modules\zypt\controllers';
 
     public function init()
     {
